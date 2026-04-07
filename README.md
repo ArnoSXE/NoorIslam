@@ -4,7 +4,6 @@ A high-performance, client-side web suite providing essential Islamic spiritual 
 
 ## 🚀 Live Demo
 [View the Live Site on Vercel](https://noorislam.vercel.app) 
-*(Note: Replace this link with your actual Vercel URL once deployed)*
 
 ## 🛠 Features
 
