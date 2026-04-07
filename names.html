@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>99 Names of Allah | NoorIslam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .names-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 3rem 0;
+    }
+    .name-card {
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+    }
+    .name-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(212,175,55,0.2);
+      border-color: rgba(212,175,55,0.5);
+    }
+    .name-num {
+      position: absolute;
+      top: 15px; left: 15px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.1);
+      color: var(--pk-gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: bold;
+    }
+    .name-arabic {
+      font-family: var(--font-arabic);
+      font-size: 2.8rem;
+      color: var(--pk-gold);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .name-trans {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.3rem;
+    }
+    .name-meaning {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo"><div class="logo-icon">☪</div><span class="logo-text">NoorIslam</span></div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a><a href="quran.html" class="nav-link">Quran</a><a href="hadith.html" class="nav-link">Hadith</a><a href="prayer.html" class="nav-link">Prayer Times</a><a href="qibla.html" class="nav-link">Qibla</a><a href="tasbeeh.html" class="nav-link">Tasbeeh</a><a href="names.html" class="nav-link active">99 Names</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title" style="font-family: var(--font-arabic)">أَسْمَاءُ اللّٰهِ الْحُسْنَى</h1>
+      <p class="page-subtitle">The 99 Beautiful Names of Allah</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="loader-container" id="namesLoader"><div class="loader"></div></div>
+    <div class="names-grid" id="namesGrid"></div>
+  </main>
+  
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const grid = document.getElementById('namesGrid');
+        const loader = document.getElementById('namesLoader');
+        
+        try {
+            const res = await fetch(`${NoorAPI.prayer()}/asmaAlHusna`);
+            const data = await res.json();
+            
+            if(data.code === 200) {
+                loader.style.display = 'none';
+                data.data.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'name-card';
+                    card.innerHTML = `
+                        <div class="name-num">${item.number}</div>
+                        <div class="name-arabic">${item.name}</div>
+                        <div class="name-trans">${item.transliteration}</div>
+                        <div class="name-meaning">${item.en.meaning}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        } catch(e) {
+            console.error(e);
+            loader.style.display = 'none';
+            grid.innerHTML = '<p style="text-align:center;width:100%">Failed to load names.</p>';
+        }
+    });
+  </script>
+</body>
+</html>

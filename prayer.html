@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer Times | NoorIslam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .prayer-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+    
+    .location-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .location-title {
+      color: var(--pk-gold);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .date-text {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .hijri-text {
+      font-family: var(--font-arabic);
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .prayer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .prayer-card {
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prayer-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    .prayer-card.current {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(0,0,0,0.5));
+      border-color: var(--pk-gold);
+    }
+
+    .prayer-card.current::before {
+      content: 'NEXT';
+      position: absolute;
+      top: 10px;
+      right: -25px;
+      background: var(--pk-gold);
+      color: black;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 2px 30px;
+      transform: rotate(45deg);
+    }
+
+    .prayer-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--pk-gold);
+    }
+
+    .prayer-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .prayer-time {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .error-msg {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">☪</div>
+        <span class="logo-text">NoorIslam</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quran.html" class="nav-link">Quran</a>
+        <a href="hadith.html" class="nav-link">Hadith</a>
+        <a href="prayer.html" class="nav-link active">Prayer Times</a>
+        <a href="qibla.html" class="nav-link">Qibla</a>
+        <a href="tasbeeh.html" class="nav-link">Tasbeeh</a>
+        <a href="names.html" class="nav-link">99 Names</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">Daily Prayer Times</h1>
+      <p class="page-subtitle">Accurate salah times based on your current location</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="prayer-container">
+      
+      <div id="errorMsg" class="error-msg"></div>
+
+      <div class="location-card">
+        <div class="location-title">
+          <span>📍</span>
+          <span id="locationText">Detecting Location...</span>
+        </div>
+        <div class="date-text" id="gregorianDate">--</div>
+        <div class="hijri-text" id="hijriDate">--</div>
+        
+        <button id="locateBtn" class="btn-primary" style="margin-top: 1.5rem;">
+          Update Location
+        </button>
+      </div>
+
+      <div class="loader-container" id="prayerLoader">
+        <div class="loader"></div>
+      </div>
+
+      <div class="prayer-grid" id="prayerGrid" style="display: none;">
+        <div class="prayer-card" id="card-Fajr">
+          <div class="prayer-icon">🌅</div>
+          <div class="prayer-name">Fajr</div>
+          <div class="prayer-time" id="time-Fajr">--:--</div>
+        </div>
+        <div class="prayer-card" id="card-Sunrise">
+          <div class="prayer-icon">🌄</div>
+          <div class="prayer-name">Sunrise</div>
+          <div class="prayer-time" id="time-Sunrise">--:--</div>
+        </div>
+        <div class="prayer-card" id="card-Dhuhr">
+          <div class="prayer-icon">☀️</div>
+          <div class="prayer-name">Dhuhr</div>
+          <div class="prayer-time" id="time-Dhuhr">--:--</div>
+        </div>
+        <div class="prayer-card" id="card-Asr">
+          <div class="prayer-icon">⛅</div>
+          <div class="prayer-name">Asr</div>
+          <div class="prayer-time" id="time-Asr">--:--</div>
+        </div>
+        <div class="prayer-card" id="card-Maghrib">
+          <div class="prayer-icon">🌇</div>
+          <div class="prayer-name">Maghrib</div>
+          <div class="prayer-time" id="time-Maghrib">--:--</div>
+        </div>
+        <div class="prayer-card" id="card-Isha">
+          <div class="prayer-icon">🌙</div>
+          <div class="prayer-name">Isha</div>
+          <div class="prayer-time" id="time-Isha">--:--</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/prayer.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holy Quran | NoorIslam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Quran Specific Styles */
+    .surah-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem 0 4rem;
+    }
+    .surah-card {
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+    .surah-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    .surah-number-badge {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--pk-gold);
+      position: relative;
+    }
+    .surah-number-badge::after {
+      content: '❀';
+      position: absolute;
+      font-size: 3.5rem;
+      color: rgba(212, 175, 55, 0.1);
+      z-index: 0;
+    }
+    .surah-info {
+      flex: 1;
+    }
+    .surah-english {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .surah-details {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .surah-arabic {
+      font-family: var(--font-arabic);
+      font-size: 1.6rem;
+      color: var(--pk-gold);
+      text-align: right;
+    }
+    
+    /* Surah Reader View */
+    .reader-container {
+      display: none;
+      padding: 2rem 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .reader-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .bismillah-header {
+      font-family: var(--font-arabic);
+      font-size: 2.5rem;
+      color: var(--pk-gold);
+      margin: 2rem 0;
+    }
+    .ayah-container {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+    }
+    .ayah-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    .ayah-number {
+      background: rgba(212, 175, 55, 0.1);
+      color: var(--pk-gold);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .ayah-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .action-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .action-btn:hover {
+      background: var(--pk-gold);
+      color: black;
+    }
+    .action-btn.playing {
+      background: var(--pk-gold);
+      color: black;
+      animation: pulse 1s infinite alternate;
+    }
+    .ayah-arabic {
+      font-family: var(--font-arabic);
+      font-size: 2.2rem;
+      line-height: 2;
+      text-align: right;
+      direction: rtl;
+      margin-bottom: 1.5rem;
+    }
+    .ayah-translation {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .back-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+    .back-btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    #globalAudioPlayer {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--pk-gold);
+      border-radius: 30px;
+      padding: 10px 20px;
+      display: none;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    #globalAudioPlayer audio {
+      height: 30px;
+    }
+    .search-bar {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .search-bar input:focus {
+      border-color: var(--pk-gold);
+      background: rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">☪</div>
+        <span class="logo-text">NoorIslam</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quran.html" class="nav-link active">Quran</a>
+        <a href="hadith.html" class="nav-link">Hadith</a>
+        <a href="prayer.html" class="nav-link">Prayer Times</a>
+        <a href="qibla.html" class="nav-link">Qibla</a>
+        <a href="tasbeeh.html" class="nav-link">Tasbeeh</a>
+        <a href="names.html" class="nav-link">99 Names</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">The Holy Quran</h1>
+      <p class="page-subtitle">Read, listen, and understand the words of Allah.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    
+    <!-- Surah List View -->
+    <div id="surahListView">
+      <div class="search-bar" style="margin-top: 2rem;">
+        <input type="text" id="searchInput" placeholder="Search Surah by name or number...">
+      </div>
+      <div class="loader-container" id="surahLoader">
+        <div class="loader"></div>
+      </div>
+      <div class="surah-grid" id="surahGrid"></div>
+    </div>
+
+    <!-- Reader View -->
+    <div id="readerView" class="reader-container">
+      <button class="back-btn" id="backBtn">← Back to Surahs</button>
+      
+      <div class="reader-header">
+        <h2 class="page-title" id="rSurahNameEn"></h2>
+        <p class="page-subtitle" id="rSurahDetails"></p>
+        <h1 class="page-title" style="font-family: var(--font-arabic)" id="rSurahNameAr"></h1>
+        <div class="bismillah-header" id="bismillahHeader">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      </div>
+      
+      <div class="loader-container" id="ayahLoader" style="display: none;">
+        <div class="loader"></div>
+      </div>
+      
+      <div id="ayahsContainer"></div>
+    </div>
+  </main>
+
+  <!-- Global Audio Player -->
+  <div id="globalAudioPlayer">
+    <span id="nowPlayingText" style="font-size: 0.9rem; font-weight: 600;"></span>
+    <audio id="audioElement" controls></audio>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/quran.js"></script>
+</body>
+</html>

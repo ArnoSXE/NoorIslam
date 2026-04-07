@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qibla Finder | NoorIslam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .qibla-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    .compass-card {
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 3rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 30px rgba(212,175,55,0.1);
+      backdrop-filter: blur(10px);
+    }
+    .compass-card::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      border: 2px dashed rgba(212,175,55,0.3);
+      border-radius: 50%;
+      animation: spin 60s linear infinite;
+    }
+    .compass-dial {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 4px solid var(--pk-gold);
+      position: relative;
+      transition: transform 0.3s ease-out;
+    }
+    .compass-labels span {
+      position: absolute;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+    }
+    .label-n { top: 10px; left: 50%; transform: translateX(-50%); color: var(--pk-gold) !important;}
+    .label-s { bottom: 10px; left: 50%; transform: translateX(-50%); }
+    .label-e { right: 15px; top: 50%; transform: translateY(-50%); }
+    .label-w { left: 15px; top: 50%; transform: translateY(-50%); }
+    
+    .qibla-arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 120px;
+      background: linear-gradient(to top, transparent 50%, var(--accent-green) 50%);
+      transform-origin: bottom center;
+      transform: translate(-50%, -100%) rotate(0deg);
+      border-radius: 5px;
+      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 10;
+    }
+    .qibla-arrow::after {
+      content: '🕋';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+    }
+    
+    .kaaba-icon {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #111;
+      border: 2px solid var(--pk-gold);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      z-index: 20;
+    }
+    
+    .info-card {
+      background: rgba(30, 41, 59, 0.7);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 2rem;
+    }
+    .qibla-degree {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--pk-gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">☪</div>
+        <span class="logo-text">NoorIslam</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quran.html" class="nav-link">Quran</a>
+        <a href="hadith.html" class="nav-link">Hadith</a>
+        <a href="prayer.html" class="nav-link">Prayer Times</a>
+        <a href="qibla.html" class="nav-link active">Qibla</a>
+        <a href="tasbeeh.html" class="nav-link">Tasbeeh</a>
+        <a href="names.html" class="nav-link">99 Names</a>
+      </div>
+      <button class="nav-toggle" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">Qibla Finder</h1>
+      <p class="page-subtitle">Find the direction to the Holy Kaaba</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="qibla-container">
+      
+      <div class="compass-card">
+        <div class="compass-dial" id="compassDial">
+          <div class="compass-labels">
+            <span class="label-n">N</span>
+            <span class="label-e">E</span>
+            <span class="label-s">S</span>
+            <span class="label-w">W</span>
+          </div>
+          <div class="qibla-arrow" id="qiblaArrow"></div>
+          <div class="kaaba-icon">🕋</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="qibla-degree" id="qiblaText">--°</div>
+        <p style="color:var(--text-muted);font-size:1.1rem">Direction from True North</p>
+        <p id="locationText" style="margin-top:1rem;color:white">Waiting for location...</p>
+      </div>
+      
+      <button class="btn-primary" id="startCompass">Locate & Start Compass</button>
+      <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">Please allow location access. On mobile devices, device orientation must be enabled.</p>
+    </div>
+  </main>
+  
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function locateQibla() {
+        const arrow = document.getElementById('qiblaArrow');
+        const text = document.getElementById('qiblaText');
+        const loc = document.getElementById('locationText');
+        
+        loc.textContent = "Detecting...";
+        
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            
+            try {
+                const locReq = await fetch(`${NoorAPI.geo()}?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
+                const locData = await locReq.json();
+                loc.textContent = `${locData.city || 'Your Location'}, ${locData.countryName || ''}`;
+                
+                const qReq = await fetch(`${NoorAPI.prayer()}/qibla/${lat}/${lng}`);
+                const qData = await qReq.json();
+                
+                if (qData.code === 200) {
+                    const direction = qData.data.direction;
+                    text.textContent = `${direction.toFixed(1)}°`;
+                    arrow.style.transform = `translate(-50%, -100%) rotate(${direction}deg)`;
+                }
+            } catch(e) {
+                loc.textContent = "Failed to calculate Qibla.";
+            }
+
+        }, (err) => {
+            loc.textContent = "Location access denied. Please allow location access.";
+        });
+    }
+
+    document.getElementById('startCompass').addEventListener('click', locateQibla);
+    document.addEventListener('DOMContentLoaded', locateQibla);
+  </script>
+</body>
+</html>

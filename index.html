@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NoorIslam - Your complete Islamic companion. Holy Quran, Hadith, Prayer Times, Qibla Finder, Digital Tasbeeh and 99 Names of Allah.">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <title>NoorIslam — The Light of Islam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">☪</div>
+        <span class="logo-text">NoorIslam</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="quran.html" class="nav-link">Quran</a>
+        <a href="hadith.html" class="nav-link">Hadith</a>
+        <a href="prayer.html" class="nav-link">Prayer Times</a>
+        <a href="qibla.html" class="nav-link">Qibla</a>
+        <a href="tasbeeh.html" class="nav-link">Tasbeeh</a>
+        <a href="names.html" class="nav-link">99 Names</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <!-- Animated Kaaba / Mosque Background -->
+    <div class="hero-bg">
+      <div class="mosque-scene">
+        <svg class="mosque-svg" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stars -->
+          <g class="stars-layer">
+            <circle cx="50" cy="40" r="1.5" fill="rgba(255,215,0,0.8)" class="star-pulse"/>
+            <circle cx="150" cy="80" r="1" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="250" cy="30" r="2" fill="rgba(255,215,0,0.9)" class="star-pulse"/>
+            <circle cx="400" cy="60" r="1.5" fill="rgba(255,215,0,0.7)"/>
+            <circle cx="500" cy="20" r="1" fill="rgba(255,215,0,0.8)" class="star-pulse"/>
+            <circle cx="650" cy="50" r="2" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="750" cy="30" r="1.5" fill="rgba(255,215,0,0.9)" class="star-pulse"/>
+            <circle cx="900" cy="70" r="1" fill="rgba(255,215,0,0.7)"/>
+            <circle cx="1050" cy="40" r="2" fill="rgba(255,215,0,0.8)" class="star-pulse"/>
+            <circle cx="1150" cy="20" r="1.5" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="100" cy="120" r="1" fill="rgba(255,215,0,0.5)"/>
+            <circle cx="320" cy="100" r="1.5" fill="rgba(255,215,0,0.7)" class="star-pulse"/>
+            <circle cx="600" cy="90" r="1" fill="rgba(255,215,0,0.6)"/>
+            <circle cx="850" cy="110" r="2" fill="rgba(255,215,0,0.8)" class="star-pulse"/>
+            <circle cx="1100" cy="80" r="1" fill="rgba(255,215,0,0.5)"/>
+          </g>
+
+          <!-- Moon -->
+          <g class="moon-group">
+            <circle cx="1100" cy="80" r="45" fill="rgba(255,240,180,0.15)" class="moon-glow"/>
+            <circle cx="1100" cy="80" r="35" fill="rgba(255,220,100,0.9)"/>
+            <circle cx="1120" cy="65" r="28" fill="rgba(20,15,40,0.95)"/>
+          </g>
+
+          <!-- Ground -->
+          <rect x="0" y="520" width="1200" height="80" fill="rgba(30,20,60,0.8)" rx="0"/>
+
+          <!-- Minaret Left Far -->
+          <g class="minaret-left-far">
+            <rect x="60" y="300" width="30" height="220" fill="rgba(100,80,180,0.4)" rx="3"/>
+            <polygon points="60,300 90,300 75,260" fill="rgba(120,100,200,0.5)"/>
+            <circle cx="75" cy="258" r="5" fill="rgba(255,215,0,0.7)"/>
+            <rect x="55" y="370" width="40" height="8" fill="rgba(120,100,200,0.4)" rx="2"/>
+          </g>
+
+          <!-- Minaret Right Far -->
+          <g class="minaret-right-far">
+            <rect x="1110" y="300" width="30" height="220" fill="rgba(100,80,180,0.4)" rx="3"/>
+            <polygon points="1110,300 1140,300 1125,260" fill="rgba(120,100,200,0.5)"/>
+            <circle cx="1125" cy="258" r="5" fill="rgba(255,215,0,0.7)"/>
+            <rect x="1105" y="370" width="40" height="8" fill="rgba(120,100,200,0.4)" rx="2"/>
+          </g>
+
+          <!-- Main Mosque Body -->
+          <rect x="200" y="380" width="800" height="140" fill="rgba(70,50,140,0.5)" rx="8"/>
+
+          <!-- Main Dome -->
+          <ellipse cx="600" cy="330" rx="140" ry="80" fill="rgba(80,60,160,0.6)"/>
+          <ellipse cx="600" cy="330" rx="135" ry="75" fill="rgba(90,70,170,0.5)"/>
+
+          <!-- Side Domes -->
+          <ellipse cx="380" cy="380" rx="90" ry="55" fill="rgba(75,55,150,0.5)"/>
+          <ellipse cx="820" cy="380" rx="90" ry="55" fill="rgba(75,55,150,0.5)"/>
+
+          <!-- Dome Details -->
+          <path d="M460,330 Q600,230 740,330" fill="none" stroke="rgba(255,215,0,0.2)" stroke-width="1.5"/>
+          <line x1="600" y1="250" x2="600" y2="280" stroke="rgba(255,215,0,0.5)" stroke-width="2"/>
+          <text x="600" y="248" text-anchor="middle" fill="rgba(255,215,0,0.8)" font-size="14">☪</text>
+
+          <!-- Minarets Main -->
+          <g class="minaret-left">
+            <rect x="230" y="200" width="40" height="320" fill="rgba(90,70,160,0.5)" rx="4"/>
+            <polygon points="225,200 275,200 250,155" fill="rgba(110,85,190,0.6)"/>
+            <circle cx="250" cy="152" r="7" fill="rgba(255,215,0,0.9)"/>
+            <rect x="220" y="280" width="60" height="12" fill="rgba(110,85,190,0.5)" rx="3"/>
+            <rect x="220" y="340" width="60" height="12" fill="rgba(110,85,190,0.5)" rx="3"/>
+            <!-- Windows -->
+            <rect x="242" y="220" width="16" height="24" fill="rgba(255,215,0,0.15)" rx="8 8 0 0"/>
+            <rect x="242" y="300" width="16" height="24" fill="rgba(255,215,0,0.15)" rx="8 8 0 0"/>
+          </g>
+
+          <g class="minaret-right">
+            <rect x="930" y="200" width="40" height="320" fill="rgba(90,70,160,0.5)" rx="4"/>
+            <polygon points="925,200 975,200 950,155" fill="rgba(110,85,190,0.6)"/>
+            <circle cx="950" cy="152" r="7" fill="rgba(255,215,0,0.9)"/>
+            <rect x="920" y="280" width="60" height="12" fill="rgba(110,85,190,0.5)" rx="3"/>
+            <rect x="920" y="340" width="60" height="12" fill="rgba(110,85,190,0.5)" rx="3"/>
+            <rect x="942" y="220" width="16" height="24" fill="rgba(255,215,0,0.15)" rx="8 8 0 0"/>
+            <rect x="942" y="300" width="16" height="24" fill="rgba(255,215,0,0.15)" rx="8 8 0 0"/>
+          </g>
+
+          <!-- Mosque Windows/Arches -->
+          <path d="M270,430 Q295,400 320,430 L320,520 L270,520 Z" fill="rgba(255,215,0,0.1)"/>
+          <path d="M360,420 Q395,385 430,420 L430,520 L360,520 Z" fill="rgba(255,215,0,0.1)"/>
+          <path d="M490,415 Q530,378 570,415 L570,520 L490,520 Z" fill="rgba(255,215,0,0.1)"/>
+          <path d="M630,415 Q670,378 710,415 L710,520 L630,520 Z" fill="rgba(255,215,0,0.1)"/>
+          <path d="M770,420 Q805,385 840,420 L840,520 L770,520 Z" fill="rgba(255,215,0,0.1)"/>
+          <path d="M880,430 Q905,400 930,430 L930,520 L880,520 Z" fill="rgba(255,215,0,0.1)"/>
+
+          <!-- Reflections in water -->
+          <ellipse cx="600" cy="590" rx="350" ry="30" fill="rgba(100,80,200,0.15)"/>
+
+          <!-- Lanterns -->
+          <g class="lantern" style="animation: sway 4s ease-in-out infinite;">
+            <line x1="500" y1="350" x2="500" y2="390" stroke="rgba(255,215,0,0.4)" stroke-width="1"/>
+            <rect x="492" y="390" width="16" height="24" fill="rgba(255,215,0,0.2)" rx="2"/>
+            <circle cx="500" cy="388" r="4" fill="rgba(255,215,0,0.6)"/>
+          </g>
+          <g class="lantern" style="animation: sway 4s ease-in-out infinite 1s;">
+            <line x1="700" y1="350" x2="700" y2="390" stroke="rgba(255,215,0,0.4)" stroke-width="1"/>
+            <rect x="692" y="390" width="16" height="24" fill="rgba(255,215,0,0.2)" rx="2"/>
+            <circle cx="700" cy="388" r="4" fill="rgba(255,215,0,0.6)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="particles-container" id="particles"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      <div class="hero-logo-row">
+        <div class="hero-book-icon">
+          <svg viewBox="0 0 80 60" width="80" height="60" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="33" height="50" fill="rgba(255,215,0,0.3)" rx="3" stroke="rgba(255,215,0,0.6)" stroke-width="1.5"/>
+            <rect x="3" y="3" width="33" height="50" fill="rgba(255,215,0,0.2)" rx="3" stroke="rgba(255,215,0,0.5)" stroke-width="1"/>
+            <rect x="42" y="5" width="33" height="50" fill="rgba(255,215,0,0.3)" rx="3" stroke="rgba(255,215,0,0.6)" stroke-width="1.5"/>
+            <line x1="5" y1="18" x2="35" y2="18" stroke="rgba(255,215,0,0.4)" stroke-width="0.8"/>
+            <line x1="5" y1="26" x2="35" y2="26" stroke="rgba(255,215,0,0.4)" stroke-width="0.8"/>
+            <line x1="5" y1="34" x2="35" y2="34" stroke="rgba(255,215,0,0.4)" stroke-width="0.8"/>
+            <line x1="42" y1="18" x2="74" y2="18" stroke="rgba(255,215,0,0.4)" stroke-width="0.8"/>
+            <line x1="42" y1="26" x2="74" y2="26" stroke="rgba(255,215,0,0.4)" stroke-width="0.8"/>
+            <line x1="42" y1="34" x2="74" y2="34" stroke="rgba(255,215,0,0.4)" stroke-width="0.8"/>
+            <path d="M37,5 Q40,3 43,5 L43,55 Q40,57 37,55 Z" fill="rgba(180,120,0,0.8)"/>
+          </svg>
+        </div>
+        <h1 class="hero-title">NoorIslam</h1>
+      </div>
+      <p class="hero-subtitle">Your Complete Islamic Digital Companion</p>
+      <p class="hero-verse">"Indeed, this Quran guides to that which is most suitable and gives good tidings to the believers" — <span>Al-Isra 17:9</span></p>
+      <div class="hero-cta">
+        <a href="quran.html" class="btn-primary">📖 Read Quran</a>
+        <a href="hadith.html" class="btn-secondary">📚 Explore Hadith</a>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Your Islamic Essentials</h2>
+        <div class="section-divider"><span>✦</span></div>
+      </div>
+      <div class="features-grid">
+
+        <a href="quran.html" class="feature-card quran-card">
+          <div class="card-glow"></div>
+          <div class="card-icon">📖</div>
+          <h3>Holy Quran</h3>
+          <p>Read all 114 Surahs in Arabic with English translation and audio recitation by Mishary Alafasy</p>
+          <div class="card-badge">114 Surahs • 6,236 Verses</div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="hadith.html" class="feature-card hadith-card">
+          <div class="card-glow"></div>
+          <div class="card-icon">📚</div>
+          <h3>Hadith Collections</h3>
+          <p>Explore authentic Hadith from Sahih Bukhari, Muslim, Abu Dawud, Tirmidhi and more</p>
+          <div class="card-badge">6 Major Books</div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="prayer.html" class="feature-card prayer-card">
+          <div class="card-glow"></div>
+          <div class="card-icon">🕌</div>
+          <h3>Prayer Times</h3>
+          <p>Get accurate 5 daily prayer times based on your GPS location anywhere in the world</p>
+          <div class="card-badge">GPS · Live Location</div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="qibla.html" class="feature-card qibla-card">
+          <div class="card-glow"></div>
+          <div class="card-icon">🧭</div>
+          <h3>Qibla Finder</h3>
+          <p>Find the direction of the Holy Kaaba with a live GPS compass from anywhere on Earth</p>
+          <div class="card-badge">Compass · Kaaba Direction</div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="tasbeeh.html" class="feature-card tasbeeh-card">
+          <div class="card-glow"></div>
+          <div class="card-icon">📿</div>
+          <h3>Digital Tasbeeh</h3>
+          <p>Count your dhikr with our digital tasbeeh counter with timer and session tracking</p>
+          <div class="card-badge">Counter · Timer</div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="names.html" class="feature-card names-card">
+          <div class="card-glow"></div>
+          <div class="card-icon">✨</div>
+          <h3>99 Names of Allah</h3>
+          <p>Explore all 99 beautiful names of Allah in Arabic, transliteration, and their meanings</p>
+          <div class="card-badge">اَلأَسْمَاءُ الْحُسْنَى</div>
+          <div class="card-arrow">→</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Daily Verse Section -->
+  <section class="daily-verse-section">
+    <div class="container">
+      <div class="daily-verse-card">
+        <div class="verse-label">✦ Verse of the Day ✦</div>
+        <div class="verse-arabic" id="dailyArabic">Loading...</div>
+        <div class="verse-translation" id="dailyTranslation">Loading...</div>
+        <div class="verse-ref" id="dailyRef"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hadith Preview Section -->
+  <section class="hadith-preview-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Major Hadith Collections</h2>
+        <div class="section-divider"><span>✦</span></div>
+        <p class="section-subtitle">Explore the authentic sayings and actions of the Prophet Muhammad ﷺ</p>
+      </div>
+      <div class="hadith-books-grid">
+        <a href="hadith.html?book=bukhari" class="hadith-book-card">
+          <div class="book-spine"></div>
+          <div class="book-content">
+            <div class="book-number">01</div>
+            <h4>Sahih Al-Bukhari</h4>
+            <p>صحيح البخاري</p>
+            <span class="hadith-count">7,563 Hadiths</span>
+          </div>
+        </a>
+        <a href="hadith.html?book=muslim" class="hadith-book-card">
+          <div class="book-spine"></div>
+          <div class="book-content">
+            <div class="book-number">02</div>
+            <h4>Sahih Muslim</h4>
+            <p>صحيح مسلم</p>
+            <span class="hadith-count">7,500 Hadiths</span>
+          </div>
+        </a>
+        <a href="hadith.html?book=abudawud" class="hadith-book-card">
+          <div class="book-spine"></div>
+          <div class="book-content">
+            <div class="book-number">03</div>
+            <h4>Sunan Abu Dawud</h4>
+            <p>سنن أبي داود</p>
+            <span class="hadith-count">5,274 Hadiths</span>
+          </div>
+        </a>
+        <a href="hadith.html?book=tirmidhi" class="hadith-book-card">
+          <div class="book-spine"></div>
+          <div class="book-content">
+            <div class="book-number">04</div>
+            <h4>Jami At-Tirmidhi</h4>
+            <p>جامع الترمذي</p>
+            <span class="hadith-count">3,956 Hadiths</span>
+          </div>
+        </a>
+        <a href="hadith.html?book=ibnmajah" class="hadith-book-card">
+          <div class="book-spine"></div>
+          <div class="book-content">
+            <div class="book-number">05</div>
+            <h4>Sunan Ibn Majah</h4>
+            <p>سنن ابن ماجه</p>
+            <span class="hadith-count">4,341 Hadiths</span>
+          </div>
+        </a>
+        <a href="hadith.html?book=nasai" class="hadith-book-card">
+          <div class="book-spine"></div>
+          <div class="book-content">
+            <div class="book-number">06</div>
+            <h4>Sunan An-Nasai</h4>
+            <p>سنن النسائي</p>
+            <span class="hadith-count">5,761 Hadiths</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <div class="logo-icon">☪</div>
+          <span>NoorIslam</span>
+        </div>
+        <p class="footer-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+        <p class="footer-sub">© 2025 NoorIslam Private Ltd. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="quran.html">Quran</a>
+          <a href="hadith.html">Hadith</a>
+          <a href="prayer.html">Prayer Times</a>
+          <a href="qibla.html">Qibla</a>
+          <a href="tasbeeh.html">Tasbeeh</a>
+          <a href="names.html">99 Names</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hadith Collections | NoorIslam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Hadith Specific Styles */
+    .hadith-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .collections-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .collection-card {
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .collection-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .collection-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--pk-gold);
+    }
+
+    .collection-card p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .chapters-view,
+    .hadiths-view {
+      display: none;
+    }
+
+    .hadith-card {
+      background: rgba(30, 41, 59, 0.6);
+      border-left: 4px solid var(--pk-gold);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .hadith-num {
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      background: var(--pk-gold);
+      color: black;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .hadith-arabic {
+      font-family: var(--font-arabic);
+      font-size: 1.8rem;
+      line-height: 2;
+      text-align: right;
+      direction: rtl;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .hadith-english {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .list-item {
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .list-item:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--pk-gold);
+    }
+
+    .back-btn {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .view-title {
+      font-size: 2rem;
+      color: var(--pk-gold);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">☪</div>
+        <span class="logo-text">NoorIslam</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quran.html" class="nav-link">Quran</a>
+        <a href="hadith.html" class="nav-link active">Hadith</a>
+        <a href="prayer.html" class="nav-link">Prayer Times</a>
+        <a href="qibla.html" class="nav-link">Qibla</a>
+        <a href="tasbeeh.html" class="nav-link">Tasbeeh</a>
+        <a href="names.html" class="nav-link">99 Names</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">Hadith Collections</h1>
+      <p class="page-subtitle">Authentic sayings and living habits of Prophet Muhammad (ﷺ)</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="hadith-container">
+
+      <!-- Collections View -->
+      <div id="collectionsView" class="collections-view">
+        <div class="collection-card" onclick="loadChapters('bukhari', 'Sahih Al-Bukhari')">
+          <h3>Sahih Al-Bukhari</h3>
+          <p>صحيح البخاري</p>
+          <div class="card-badge">7,563 Hadiths</div>
+        </div>
+        <div class="collection-card" onclick="loadChapters('muslim', 'Sahih Muslim')">
+          <h3>Sahih Muslim</h3>
+          <p>صحيح مسلم</p>
+          <div class="card-badge">7,500 Hadiths</div>
+        </div>
+        <div class="collection-card" onclick="loadChapters('abudawud', 'Sunan Abu Dawud')">
+          <h3>Sunan Abu Dawud</h3>
+          <p>سنن أبي داود</p>
+          <div class="card-badge">5,274 Hadiths</div>
+        </div>
+        <div class="collection-card" onclick="loadChapters('tirmidhi', 'Jami At-Tirmidhi')">
+          <h3>Jami At-Tirmidhi</h3>
+          <p>جامع الترمذي</p>
+          <div class="card-badge">3,956 Hadiths</div>
+        </div>
+        <div class="collection-card" onclick="loadChapters('ibnmajah', 'Sunan Ibn Majah')">
+          <h3>Sunan Ibn Majah</h3>
+          <p>سنن ابن ماجه</p>
+          <div class="card-badge">4,341 Hadiths</div>
+        </div>
+        <div class="collection-card" onclick="loadChapters('nasai', 'Sunan An-Nasai')">
+          <h3>Sunan An-Nasai</h3>
+          <p>سنن النسائي</p>
+          <div class="card-badge">5,761 Hadiths</div>
+        </div>
+      </div>
+
+      <!-- Chapters View -->
+      <div id="chaptersView" class="chapters-view">
+        <button class="back-btn" onclick="showView('collectionsView')">← Back to Collections</button>
+        <h2 class="view-title" id="currentBookName"></h2>
+        <div class="loader-container" id="chaptersLoader" style="display: none;">
+          <div class="loader"></div>
+        </div>
+        <div id="chaptersList"></div>
+      </div>
+
+      <!-- Hadiths View -->
+      <div id="hadithsView" class="hadiths-view">
+        <button class="back-btn" onclick="showView('chaptersView')">← Back to Chapters</button>
+        <h2 class="view-title" id="currentChapterName"></h2>
+        <div class="loader-container" id="hadithsLoader" style="display: none;">
+          <div class="loader"></div>
+        </div>
+        <div id="hadithsList"></div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <button class="btn-primary" id="loadMoreBtn" style="display: none;">Load More</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-sub">© 2025 NoorIslam Private Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/hadith.js"></script>
+</body>
+
+</html>
